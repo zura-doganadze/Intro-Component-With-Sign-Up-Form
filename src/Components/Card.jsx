@@ -1,6 +1,5 @@
 import DesktopImage from "../assets/bg-intro-desktop.png";
 import MobileImage from "../assets/bg-intro-mobile.png";
-
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -75,7 +74,12 @@ const InputContainer = styled.div`
   background: #fff;
   box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
 `;
-
+const Input = styled.input`
+  color: #3d3b48;
+  font-size: 14px;
+  letter-spacing: 0.25px;
+  height: 40px;
+`;
 const Button = styled.button`
   border: none;
   border-radius: 5px;
@@ -98,11 +102,11 @@ const DescriptionContainer = styled.div`
 `;
 const LeftDescription = styled.span`
   color: #bab7d4;
-  margin-right: 5px;
 `;
 const RightDescription = styled.span`
-  color: #ff7979;
+  color: #bab7d4;
 `;
+
 function Card() {
   return (
     <Wrapper>
@@ -120,14 +124,14 @@ function Card() {
           <RightTitle>then $20/mo. thereafter</RightTitle>
         </InputTitle>
         <InputContainer>
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
+          <Input type="text" />
+          <Input type="text" />
+          <Input type="text" />
+          <Input type="text" />
           <Button>CLAIM YOUR FREE TRIAL</Button>
           <DescriptionContainer>
             <LeftDescription>
-              By clicking the button, you are agreeing to our
+              By clicking the button, you are agreeing to our{" "}
             </LeftDescription>
             <RightDescription>Terms and Services</RightDescription>
           </DescriptionContainer>

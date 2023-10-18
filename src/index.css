@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Overpass&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Space+Grotesk:wght@600&display=swap");
 .divs {
   background-image: url("./assets/bg-intro-mobile.png");
   background-size: cover;
@@ -10,7 +9,7 @@
 }
 body {
   text-align: center;
-  font-family: "Overpass", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 #root {
   width: 100%;

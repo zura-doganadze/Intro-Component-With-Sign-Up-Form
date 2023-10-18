@@ -1,3 +1,4 @@
+import { useState } from "react";
 import DesktopImage from "../assets/bg-intro-desktop.png";
 import MobileImage from "../assets/bg-intro-mobile.png";
 import styled from "styled-components";
@@ -74,11 +75,20 @@ const InputContainer = styled.div`
   background: #fff;
   box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
 `;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  margin-top: 24px;
+`;
 const Input = styled.input`
   color: #3d3b48;
   font-size: 14px;
   letter-spacing: 0.25px;
-  height: 40px;
+  padding: 15px 35px;
+  border-radius: 5px;
+  border: 1px solid #5e54a4;
+  background: #fff;
 `;
 const Button = styled.button`
   border: none;
@@ -104,10 +114,50 @@ const LeftDescription = styled.span`
   color: #bab7d4;
 `;
 const RightDescription = styled.span`
-  color: #bab7d4;
+  color: #ff7979;
 `;
 
 function Card() {
+  const [useForm, setUseForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [useFormErrors, setUseFormErrors] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const inputHandler = (e) => {
+    const { value, name } = e.target;
+    setUseForm({
+      ...useForm,
+      [name]: value,
+    });
+  };
+  const submitHandler = (e) => {};
+
+  const errorHandler = () => {
+    const emailRagex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+    const errors = {};
+
+    if (useForm.firstName.trim() === "") {
+      errors.firstName = "First Name cannot be empty";
+    }
+    if (useForm.lastName.trim() === "") {
+      errors.lastName = "Last Name cannot be empty";
+    }
+    if (useForm.email.trim() === "") {
+      errors.email = "Looks like this is not an email";
+    }
+    if (useForm.password.trim() === "") {
+      errors.password = "Password cannot be empty";
+    }
+    setUseFormErrors(errors)
+  };
   return (
     <Wrapper>
       <TextContainer>
@@ -124,11 +174,33 @@ function Card() {
           <RightTitle>then $20/mo. thereafter</RightTitle>
         </InputTitle>
         <InputContainer>
-          <Input type="text" />
-          <Input type="text" />
-          <Input type="text" />
-          <Input type="text" />
-          <Button>CLAIM YOUR FREE TRIAL</Button>
+          <Form onSubmit={submitHandler} action="">
+            <Input
+              onChange={inputHandler}
+              name="firstName"
+              type="text"
+              placeholder="Jonathan"
+            />
+            <Input
+              onChange={inputHandler}
+              name="lastName"
+              type="text"
+              placeholder="Last Name"
+            />
+            <Input
+              onChange={inputHandler}
+              name="email"
+              type="email"
+              placeholder="Email Address"
+            />
+            <Input
+              onChange={inputHandler}
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+            <Button>CLAIM YOUR FREE TRIAL</Button>
+          </Form>
           <DescriptionContainer>
             <LeftDescription>
               By clicking the button, you are agreeing to our{" "}

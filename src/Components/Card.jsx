@@ -90,6 +90,13 @@ const Input = styled.input`
   border: 1px solid #5e54a4;
   background: #fff;
 `;
+const ErrorSpan = styled.span`
+  color: #ff7979;
+  text-align: right;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+`;
 const Button = styled.button`
   border: none;
   border-radius: 5px;
@@ -138,7 +145,10 @@ function Card() {
       [name]: value,
     });
   };
-  const submitHandler = (e) => {};
+  const submitHandler = (e) => {
+    e.preventDefault();
+    errorHandler();
+  };
 
   const errorHandler = () => {
     const emailRagex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
@@ -156,7 +166,7 @@ function Card() {
     if (useForm.password.trim() === "") {
       errors.password = "Password cannot be empty";
     }
-    setUseFormErrors(errors)
+    setUseFormErrors(errors);
   };
   return (
     <Wrapper>
@@ -180,26 +190,42 @@ function Card() {
               name="firstName"
               type="text"
               placeholder="Jonathan"
+              value={useForm.firstName}
             />
+            {useFormErrors.firstName && (
+              <ErrorSpan>{useFormErrors.firstName}</ErrorSpan>
+            )}
             <Input
               onChange={inputHandler}
               name="lastName"
               type="text"
               placeholder="Last Name"
+              value={useForm.lastName}
             />
+            {useFormErrors.lastName && (
+              <ErrorSpan>{useFormErrors.lastName}</ErrorSpan>
+            )}
             <Input
               onChange={inputHandler}
               name="email"
               type="email"
               placeholder="Email Address"
+              value={useForm.email}
             />
+            {useFormErrors.email && (
+              <ErrorSpan>{useFormErrors.email}</ErrorSpan>
+            )}
             <Input
               onChange={inputHandler}
               name="password"
               type="password"
               placeholder="Password"
+              value={useForm.password}
             />
-            <Button>CLAIM YOUR FREE TRIAL</Button>
+            {useFormErrors.password && (
+              <ErrorSpan>{useFormErrors.password}</ErrorSpan>
+            )}
+            <Button type="submit">CLAIM YOUR FREE TRIAL</Button>
           </Form>
           <DescriptionContainer>
             <LeftDescription>
